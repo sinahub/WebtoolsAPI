@@ -35,10 +35,36 @@ class OrganisationController extends Controller
     }
 
     public function updateOrganisation(Request $request, $id) {
-
+        if (Organisation::where('id', $id)->exists()) {
+            $organisation = Organisation::find($id);
+            $organisation->name = is_null($request->name) ? $organisation->name : $request->name;
+            $organisation->save();
+    
+            return response()->json([
+                "message" => "records updated successfully"
+            ], 200);
+        } else {
+        return response()->json([
+            "message" => "Organisation not found"
+        ], 404);
+            
+        }
     }
 
     public function deleteOrganisation ($id) {
-        
+        if(Organisation::where('id', $id)->exists()) {
+            $organisation = Organisation::find($id);
+
+            // TODO alert if the Organisation has any branch to avoid unwanted deleting.
+            $organisation->delete();
+    
+            return response()->json([
+              "message" => "record deleted"
+            ], 202);
+        } else {
+        return response()->json([
+            "message" => "Organisation not found"
+        ], 404);
+        }
     }
 }
