@@ -5,6 +5,7 @@ use Illuminate\Database\Seeder;
 use App\Organisation;
 use App\Branch;
 use App\Staff;
+use Faker\Factory;
 
 class DatabaseSeeder extends Seeder
 {
@@ -76,10 +77,13 @@ class StaffTableSeeder extends Seeder {
 
     public function run()
     {
+        $faker = Factory::create();
         DB::table('staff')->delete();
 
         for ($i=0; $i < 20; $i++) { 
-	    	Staff::create([ 'name' => ucfirst(strtolower(Str::random(6))), 'branch_id' => rand(1, 15) ]);
+            Staff::create([ 'name' => $faker->name,
+                            'branch_id' => rand(1, 15) 
+                          ]);
         }
         
 

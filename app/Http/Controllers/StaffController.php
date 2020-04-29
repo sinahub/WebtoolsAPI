@@ -11,9 +11,15 @@ class StaffController extends Controller
 {
     public function getAllStaff() {
         // TODO tidy up JSON format
-        $staff = Staff::with('branch.organisation')->get()->toJson();
+        $staff = Staff::with(array('branch.organisation'=>function($query){
+            $query->select('id','name');
+        }))->get(['id','name', 'branch_id'])->toJson();
         return response($staff, 200);
     }
+
+    // $branches = Branch::with(array('organisation'=>function($query){
+    //     $query->select('id','name');
+    // }))->get(['id','name', 'organisation_id'])->toJson();
 
     public function createStaff(Request $request) {
         // check if the branch ID exists

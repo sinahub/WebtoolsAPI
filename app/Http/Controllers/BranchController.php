@@ -10,6 +10,7 @@ use App\Organisation;
 class BranchController extends Controller
 {
     public function getAllBranches() {
+        // TODO include dates if business asks for
         $branches = Branch::with(array('organisation'=>function($query){
             $query->select('id','name');
         }))->get(['id','name', 'organisation_id'])->toJson();
