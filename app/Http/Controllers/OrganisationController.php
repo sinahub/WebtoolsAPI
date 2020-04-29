@@ -9,7 +9,7 @@ use App\Organisation;
 class OrganisationController extends Controller
 {
     public function getAllOrganisations() {
-        $organisations = Organisation::get()->toJson(JSON_PRETTY_PRINT);
+        $organisations = Organisation::get(['id', 'name'])->toJson();
         return response($organisations, 200);
     }
 
@@ -25,7 +25,7 @@ class OrganisationController extends Controller
 
     public function getOrganisation($id) {
         if (Organisation::where('id', $id)->exists()) {
-            $organisation = Organisation::where('id', $id)->get()->toJson(JSON_PRETTY_PRINT);
+            $organisation = Organisation::where('id', $id)->get()->toJson();
             return response($organisation, 200);
           } else {
             return response()->json([
