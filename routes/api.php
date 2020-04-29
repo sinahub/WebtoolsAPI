@@ -18,11 +18,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('organisations', 'OrganisationController@getAllOrganisations');
-Route::get('organisations/{id}', 'OrganisationController@getOrganisation');
-Route::post('organisations', 'OrganisationController@createOrganisation');
-Route::put('organisations/{id}', 'OrganisationController@updateOrganisation');
-Route::delete('organisations/{id}','OrganisationController@deleteOrganisation');
+Route::get('organisations', 'OrganisationController@getAllOrganisations')->name('organisations');
+Route::get('organisations/{id}', 'OrganisationController@getOrganisation')->name('organisation');
+Route::post('organisations', 'OrganisationController@createOrganisation')->name('createOrganisation');
+Route::put('organisations/{id}', 'OrganisationController@updateOrganisation')->name('organisationsUpdate');
+Route::delete('organisations/{id}','OrganisationController@deleteOrganisation')->name('organisationsDelete');
 
 Route::get('branches', 'BranchController@getAllBranches');
 Route::get('branches/{id}', 'BranchController@getBranch');
