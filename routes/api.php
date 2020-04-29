@@ -17,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('organisations', 'OrganisationController@getAllOrganisations');
+Route::get('organisations/{id}', 'OrganisationController@getOrganisation');
+Route::post('organisations', 'OrganisationController@createOrganisation');
+Route::put('organisations/{id}', 'OrganisationController@updateOrganisation');
+Route::delete('organisations/{id}','OrganisationController@deleteOrganisation');
