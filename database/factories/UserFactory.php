@@ -3,6 +3,9 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\User;
+use App\Organisation;
+use App\Branch;
+use App\Staff;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
@@ -24,5 +27,29 @@ $factory->define(User::class, function (Faker $faker) {
         'email_verified_at' => now(),
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         'remember_token' => Str::random(10),
+    ];
+});
+
+$factory->define(Organisation::class, function (Faker $faker) {
+    return [
+        'name' => $faker->name
+    ];
+});
+
+$factory->define(Branch::class, function (Faker $faker) {
+    $rand_org = Organisation::all('id')->random(1)[0]['id'];
+
+    return [
+        'name' => $faker->name,
+        'organisation_id' => $rand_org,
+    ];
+});
+
+$factory->define(Staff::class, function (Faker $faker) {
+    $rand_branch = Branch::all('id')->random(1)[0]['id'];
+
+    return [
+        'name' => $faker->name,
+        'branch_id' => $rand_branch,
     ];
 });
