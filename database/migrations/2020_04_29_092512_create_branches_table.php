@@ -14,7 +14,10 @@ class CreateBranchesTable extends Migration
     public function up()
     {
         Schema::create('branch', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->integer('organisation_id')->unsigned();
+            $table->string('name');
+            $table->foreign('organisation_id')->references('id')->on('organisation')->onDelete('cascade');
             $table->timestamps();
         });
     }
