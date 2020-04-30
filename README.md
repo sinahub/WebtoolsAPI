@@ -1,3 +1,6 @@
+[![Laravel](https://github.com/sinahub/WebtoolsAPI/workflows/Laravel/badge.svg)](https://github.com/sinahub/WebtoolsAPI/actions)
+
+
 # WebtoolsAPI
 
 Development: laravel/homestead package is included. For installation guide refer to https://laravel.com/docs/6.x/homestead
